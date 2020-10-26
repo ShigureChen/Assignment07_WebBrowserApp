@@ -14,8 +14,7 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="1dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Enter URL Here"
+        android:inputType="textUri"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -15,6 +15,7 @@ public class BrowserActivity extends AppCompatActivity implements PageControlFra
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -28,25 +29,19 @@ public class BrowserActivity extends AppCompatActivity implements PageControlFra
         ft.commit();
     }
 
+    //URL from control
     @Override
     public void onURLSend(String string) {
-        final String head = "https://";
-
-        if(!string.substring(0,head.length()).equals(head))
-        {
-            string = head.concat(string);
-        }
-
         Bundle bundle = new Bundle();
         bundle.putString("url", string);
         pvf.setArguments(bundle);
     }
 
+
+    //URL from viewer
     @Override
     public void onDataSend(String string) {
-        Bundle bundle = new Bundle();
-        bundle.putString("url", string);
-        pcf.setArguments(bundle);
+        pcf.updateText(string);
     }
 
     @Override

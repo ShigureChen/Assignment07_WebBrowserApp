@@ -19,8 +19,6 @@ public class PageViewerFragment extends Fragment {
     String string;
     public interface PageViewerListener
     {
-        void onURLSend(String string);
-
         void onDataSend(String string);
 
     }
@@ -46,16 +44,15 @@ public class PageViewerFragment extends Fragment {
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient(){
 
-        webView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            public void onPageFinished(WebView view, String url)
+            {
+                super.onPageFinished(view, url);
                 string = webView.getUrl();
                 pv.onDataSend(string);
             }
         });
-
 
         return view;
     }

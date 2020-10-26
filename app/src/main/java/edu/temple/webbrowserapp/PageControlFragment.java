@@ -41,10 +41,33 @@ public class PageControlFragment extends Fragment {
             string = bundle.getString("url");
             editText.setText(string);
         }
-        else
-        {
-            editText.setText("https://www.google.com");
-        }
+
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                switch (keyEvent.getAction())
+                {
+                    case KeyEvent.ACTION_UP:
+                        String string = editText.getText().toString();
+                        editText.setText(urlCheck(string));
+                    case KeyEvent.ACTION_DOWN:
+                        break;
+                }
+                return false;
+            }
+
+            private String urlCheck(String string)
+            {
+                final String head = "https://";
+
+                if(!string.substring(0,head.length()).equals(head))
+                {
+                    string = head.concat(string);
+                }
+
+                return string;
+            }
+        });
 
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +97,14 @@ public class PageControlFragment extends Fragment {
 
         return view;
     }
+
+    public void updateText(String newURL)
+    {
+        this.string = newURL;
+        editText.getText().clear();
+        editText.setText(string);
+    }
+
 
     @Override
     public void onAttach(Context context) {
