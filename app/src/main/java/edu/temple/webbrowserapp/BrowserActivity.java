@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 public class BrowserActivity extends AppCompatActivity implements PageControlFragment.PageControlListener, PageViewerFragment.PageViewerListener{
 
@@ -15,7 +16,7 @@ public class BrowserActivity extends AppCompatActivity implements PageControlFra
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -32,9 +33,14 @@ public class BrowserActivity extends AppCompatActivity implements PageControlFra
     //URL from control
     @Override
     public void onURLSend(String string) {
-        Bundle bundle = new Bundle();
-        bundle.putString("url", string);
-        pvf.setArguments(bundle);
+
+        final String head = "https://";
+
+        if(!string.substring(0,head.length()).equals(head))
+        {
+            string = head.concat(string);
+        }
+        pvf.loadNewPage(string);
     }
 
 

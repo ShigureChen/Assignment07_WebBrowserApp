@@ -45,7 +45,6 @@ public class PageViewerFragment extends Fragment {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient(){
-
             public void onPageFinished(WebView view, String url)
             {
                 super.onPageFinished(view, url);
@@ -55,6 +54,11 @@ public class PageViewerFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public void loadNewPage(String newUrl)
+    {
+        webView.loadUrl(newUrl);
     }
 
     @Override

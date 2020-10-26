@@ -42,6 +42,7 @@ public class PageControlFragment extends Fragment {
             editText.setText(string);
         }
 
+
         editText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -49,24 +50,14 @@ public class PageControlFragment extends Fragment {
                 {
                     case KeyEvent.ACTION_UP:
                         String string = editText.getText().toString();
-                        editText.setText(urlCheck(string));
+                        editText.setText(string);
                     case KeyEvent.ACTION_DOWN:
                         break;
                 }
+                pc.onURLSend(string);
                 return false;
             }
 
-            private String urlCheck(String string)
-            {
-                final String head = "https://";
-
-                if(!string.substring(0,head.length()).equals(head))
-                {
-                    string = head.concat(string);
-                }
-
-                return string;
-            }
         });
 
         goButton.setOnClickListener(new View.OnClickListener() {
